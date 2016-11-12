@@ -5,6 +5,7 @@ public class MoveEnemy : MonoBehaviour {
 
 	Vector3 movement;
 	bool isTherePath = false;
+	bool isDead = false;
 
 	public float screenBoundX;
 	public float screenBoundY;
@@ -19,36 +20,64 @@ public class MoveEnemy : MonoBehaviour {
         enemyController = GameObject.Find("EnemyController");
         deathWall = GameObject.Find("DeathWall");
         enemyPath = enemyController.GetComponent<EnemyController>();
+
+		if (enemyPath != null) {
+			isTherePath = true;
+		}
+
+		InvokeRepeating ("CheckPath", pathMoveDur, pathMoveDur);
+			
     }
 
 	// Called when physics updates instead of every frame
 	void FixedUpdate () {
-		CheckPath ();
+		//CheckPath ();
+		transform.position = Vector3.MoveTowards (transform.position, movement, speed * Time.deltaTime);
 	}
 
-	void Move(){
+	void reversePath(){
+		enemyPath.pathList.Reverse ();
+	}
+
+	IEnumerator Move ()
+	{
 		foreach (Vector3 i in enemyPath.pathList){
 			movement.Set (i.x, i.y, i.z);
 			if (transform.position != movement) {
-				transform.position = Vector3.MoveTowards (transform.position, movement, speed * Time.deltaTime);
-			}
-			else {
-				continue;
+				yield return new WaitForSeconds(pathMoveDur);
 			}
 		}
+
+		movement.Set (deathWall.transform.position.x, deathWall.transform.position.y, deathWall.transform.position.z);
+
 	}
 
 	void CheckPath (){ 
+		if (!isDead) {
+			if (isTherePath) {
+				StartCoroutine(Move());
+			} 
 
-		if (isTherePath) {
-			InvokeRepeating ("Move", pathMoveDur, pathMoveDur);
-        }
-
-		else {
-            movement.Set(deathWall.transform.position.x, deathWall.transform.position.y, deathWall.transform.position.z);
-            transform.position = Vector3.MoveTowards (transform.position, movement, speed * Time.deltaTime);
+			else {
+				Debug.Log ("no path");
+				movement.Set (deathWall.transform.position.x, deathWall.transform.position.y, deathWall.transform.position.z);
+			}
 		}
 			
+	}
+
+	void OnCollisionEnter (Collision col)
+	{
+		if(col.gameObject.name == "DeathWall")
+		{
+			isDead = true;
+			Destroy(gameObject);
+		}
+
+		if(col.gameObject.name == "InvisibleWalls")
+		{
+			reversePath ();
+		}
 	}
 		
 }
