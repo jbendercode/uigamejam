@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using VRStandardAssets.Common;
 using VRStandardAssets.Utils;
+using UnityEngine.Networking;
 
 namespace VRStandardAssets.ShootingGallery
 {
@@ -10,7 +11,7 @@ namespace VRStandardAssets.ShootingGallery
     // includes the introduction, spawning of targets and
     // outro.  Targets are spawned with a system that makes
     // spawnning more likely when there are fewer.
-    public class ShootingGalleryController : MonoBehaviour
+    public class ShootingGalleryController : NetworkBehaviour
     {
         [SerializeField] private SessionData.GameType m_GameType;       // Whether this is a 180 or 360 shooter.
         [SerializeField] private int m_IdealTargetNumber = 5;           // How many targets aim to be on screen at once.
@@ -228,14 +229,25 @@ namespace VRStandardAssets.ShootingGallery
 
         private void HandleTargetRemoved(ShootingTarget target)
         {
+            //Network.Destroy(target.gameObject);
+            CmdUpdateScore(target.gameObject);
             // Now that the event has been hit, unsubscribe from it.
-            target.OnRemove -= HandleTargetRemoved;
+            /*target.OnRemove -= HandleTargetRemoved;
 
             // Return the target to it's object pool.
             m_TargetObjectPool.ReturnGameObjectToPool (target.gameObject);
 
             // Increase the likelihood of a spawn next time because there are fewer targets now.
             m_SpawnProbability += m_ProbabilityDelta;
+            */
+        }
+
+        [Command]
+        void CmdUpdateScore(GameObject target)
+        {
+            Debug.Log("Command destroy");
+            target.GetComponent<MoveEnemy>().isShot = true;
+
         }
     }
 }

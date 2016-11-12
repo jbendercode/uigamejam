@@ -58,6 +58,7 @@ namespace VRStandardAssets.ShootingGallery
         {
             // Ensure the event is completely unsubscribed when the target is destroyed.
             OnRemove = null;
+            gameObject.GetComponent<MoveEnemy>().ShotDestroy();
         }
         
 

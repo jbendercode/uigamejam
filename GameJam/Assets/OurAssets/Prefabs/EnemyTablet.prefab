@@ -23,6 +23,8 @@ GameObject:
   - 65: {fileID: 65000013855698722}
   - 23: {fileID: 23000011941560982}
   - 114: {fileID: 114000013243533924}
+  - 114: {fileID: 114000012402766236}
+  - 114: {fileID: 114000012332734536}
   m_Layer: 0
   m_Name: EnemyTablet
   m_TagString: Untagged
@@ -91,6 +93,58 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114000012332734536
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014034856382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 0.04
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
+--- !u!114 &114000012402766236
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014034856382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 146
+    i1: 237
+    i2: 100
+    i3: 8
+    i4: 109
+    i5: 178
+    i6: 180
+    i7: 212
+    i8: 200
+    i9: 136
+    i10: 110
+    i11: 251
+    i12: 116
+    i13: 197
+    i14: 74
+    i15: 55
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114000013243533924
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -104,8 +158,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   screenBoundX: 16
   screenBoundY: 10
-  speed: 5
-  pathMoveDur: 2
+  speed: 20
+  pathMoveDur: 1
   enemyController: {fileID: 0}
   enemyPath: {fileID: 0}
   deathWall: {fileID: 0}

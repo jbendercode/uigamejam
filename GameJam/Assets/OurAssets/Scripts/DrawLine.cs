@@ -8,7 +8,7 @@ public class DrawLine : MonoBehaviour {
 		if (((Input.touchCount > 0 && Input.GetTouch (0).phase == TouchPhase.Moved)
 		    || Input.GetMouseButton (0))) {
 
-			Plane objPlane = new Plane (Camera.main.transform.forward *= 1, this.transform.position);
+			Plane objPlane = new Plane (Camera.main.transform.forward, this.transform.position);
 
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 			float rayDistance;

@@ -4,8 +4,10 @@ using System.Collections;
 public class EnemyController : MonoBehaviour {
 
 	Vector3 movement;
+    public  ArrayList fullPathList= new ArrayList();
 
-	public ArrayList pathList = new ArrayList();
+
+    private ArrayList pathList = new ArrayList();
 	public float screenBoundX;
 	public float screenBoundY;
 
@@ -29,10 +31,7 @@ public class EnemyController : MonoBehaviour {
 			addLocationTimer -= 1;
 
 			if (addLocationTimer == 0){
-//				Touch touch = Input.GetTouch (0);
-//
-//				float moveX = -(screenBoundX/2) + screenBoundX * touch.position.x / Screen.width;
-//				float moveY = -(screenBoundY/2) + screenBoundY * touch.position.y / Screen.height;
+
 
 				Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
 				Plane plane = new Plane(Vector3.up, transform.position);
@@ -42,18 +41,25 @@ public class EnemyController : MonoBehaviour {
 					movement = ray.GetPoint (distance);
 				}
 
-				//movement.Set (moveX, 1f, moveY);
 				addLocationTimer = 5;
 				pathList.Add (movement);
 			}
-		}
+            Debug.Log("Got Path");
+        }
+
+        if (Input.touchCount >0 && Input.GetTouch(0).phase == TouchPhase.Ended) {
+            fullPathList.Clear();
+            fullPathList.AddRange(pathList);
+            pathList.Clear();
+            Debug.Log("Path Clear");
+        }
 
 		if (Input.touchCount == 0 && isTouching){
 			foreach (var i in pathList){
 				//Debug.Log(i);
 			}
 			isTouching = false;
-		}
+        }
 
 
 	}
