@@ -104,7 +104,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   screenBoundX: 16
   screenBoundY: 10
-  speed: 10
+  speed: 5
+  pathMoveDur: 2
   enemyController: {fileID: 0}
   enemyPath: {fileID: 0}
   deathWall: {fileID: 0}
