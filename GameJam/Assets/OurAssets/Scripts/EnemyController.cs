@@ -5,10 +5,12 @@ public class EnemyController : MonoBehaviour {
 
 	Vector3 movement;
 
-    public ArrayList pathList = new ArrayList();
-    public float screenBoundX;
+	public ArrayList pathList = new ArrayList();
+	public float screenBoundX;
 	public float screenBoundY;
-	public float pathTimer = 1f;
+
+	private int addLocationTimer = 5;
+	private bool isTouching = false;
 
 	// Use this for initialization
 	void Awake () {
@@ -22,21 +24,28 @@ public class EnemyController : MonoBehaviour {
 
 	void getPath(){
 
-		for(int i = 0; i < pathTimer; i++)
-		{
-			if (Input.touchCount == 1) {
+		if (Input.touchCount == 1) {
+			isTouching = true;
+			addLocationTimer -= 1;
+			if (addLocationTimer == 0){
 				Touch touch = Input.GetTouch (0);
 
 				float moveX = -(screenBoundX/2) + screenBoundX * touch.position.x / Screen.width;
 				float moveY = -(screenBoundY/2) + screenBoundY * touch.position.y / Screen.height;
 
 				movement.Set (moveX, 1f, moveY);
-				Debug.Log (movement);
 
 				pathList.Add (movement);
 			}
 		}
 
-		Debug.Log (pathList);
+		if (Input.touchCount == 0 && isTouching){
+			foreach (var i in pathList){
+				Debug.Log(i);
+			}
+			isTouching = false;
+		}
+
+
 	}
 }

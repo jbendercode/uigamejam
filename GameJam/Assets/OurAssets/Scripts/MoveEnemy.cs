@@ -9,7 +9,7 @@ public class MoveEnemy : MonoBehaviour {
 	public float screenBoundX;
 	public float screenBoundY;
 	public float speed = 1f;
-	//ArrayList pathList = new ArrayList();
+	public float pathMoveDur;
     public GameObject enemyController;
     public EnemyController enemyPath;
     public GameObject deathWall;
@@ -23,17 +23,25 @@ public class MoveEnemy : MonoBehaviour {
 
 	// Called when physics updates instead of every frame
 	void FixedUpdate () {
-		Move ();
+		CheckPath ();
 	}
 
-	void Move (){ 
-
-		if (isTherePath) {
-			foreach (Vector3 i in enemyPath.pathList){
-				movement.Set (i.x, i.y, i.z);
+	void Move(){
+		foreach (Vector3 i in enemyPath.pathList){
+			movement.Set (i.x, i.y, i.z);
+			if (transform.position != movement) {
 				transform.position = Vector3.MoveTowards (transform.position, movement, speed * Time.deltaTime);
 			}
+			else {
+				continue;
+			}
+		}
+	}
 
+	void CheckPath (){ 
+
+		if (isTherePath) {
+			InvokeRepeating ("Move", pathMoveDur, pathMoveDur);
         }
 
 		else {
