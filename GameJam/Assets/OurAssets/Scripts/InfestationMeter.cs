@@ -43,7 +43,7 @@ public class InfestationMeter : MonoBehaviour {
 	// Change value
 	public void addToValue(int changeByAmount){
 		currentAmount += changeByAmount;
-		//currentAmount = currentAmount < 0 ? 0 : currentAmount;
+		currentAmount = currentAmount < 0 ? 0 : currentAmount;
 	}
 
 	// Set speed
