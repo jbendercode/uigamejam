@@ -18,15 +18,6 @@ public class Tile : MonoBehaviour {
 
 	// Set tile type
 	public void setTileType(int type){
-		tileType = type;
-
-		switch (type) {
-			case 0:
-				gameObject.GetComponent<Renderer>().material = tileMaterials [0];
-				break;
-			case 1:
-				gameObject.GetComponent<Renderer>().material = tileMaterials [1];
-				break;
-		}
+		gameObject.GetComponent<Renderer>().material = tileMaterials [type];
 	}
 }

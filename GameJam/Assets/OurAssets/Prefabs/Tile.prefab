@@ -102,3 +102,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd4647dbe019f643ad05d481cbef271, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileMaterials:
+  - {fileID: 2100000, guid: a77983ff9e66c7640a771cd68db8eda6, type: 2}
+  - {fileID: 2100000, guid: f5e4ea9cf3bf077499168bae3ffc6f30, type: 2}
+  - {fileID: 2100000, guid: c61cdfda9af93464a84fa93937a78dc0, type: 2}
+  - {fileID: 2100000, guid: 944ba37d2cdbfcd4698ae3ab089d6f42, type: 2}
